@@ -14,7 +14,7 @@ romans = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
 def roman_to_arabic(roman):
     arabic = 0
     for i in range(len(roman) - 1):  # skip the last char so the if works
-        if romans[roman[i]] < romans[roman[i + 1]]:  # currently theres an issue with the final char
+        if romans[roman[i]] < romans[roman[i + 1]]:
             arabic -= romans[roman[i]]
         else:
             arabic += romans[roman[i]]
