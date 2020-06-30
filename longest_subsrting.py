@@ -39,16 +39,16 @@ def lengthOfLongestSubstring(self, s: str) -> int:
 def lengthOfLongestSubstring(s: str) -> int:
     #get length of string as set
     maxlen = len(set(s))
-    # the minimum return value will always be one
-    while maxlen > 1:
+    # the minimum return value will always be zero (empty string)
+    while maxlen > 0:
         # move a window over the string
-        for i in range(len(s)-maxlen):
+        for i in range(len(s)-maxlen+1):
             # if the window has no repeated chars its the max length
             if len(set(s[i:i+maxlen])) == maxlen:
                 return maxlen
         # if the window got to the end and didn't find one get smaller and try again
         maxlen -=1
-    return 1
+    return maxlen
 
 # this is certainly a prettier solution, but I don't actually know that its faster
 # the while loop will run a maximum of maxlen times (so larger number of chars means longer runtime)
