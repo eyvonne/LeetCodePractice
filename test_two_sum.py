@@ -21,11 +21,11 @@ class TestTwoSum(unittest.TestCase):
         self.assertEqual(two_sum(l, 10), (1, 3))
 
     def test_add_zero(self):
-        l = [2, 3, 0, 5]
+        l = [2, 3, 0, 6]
         result = two_sum(l, 3)
         self.assertEqual(result, (1, 2))
         self.assertEqual(two_sum(l, 2), (0, 2))
-        self.assertEqual(two_sum(l, 5), (2, 3))
+        self.assertEqual(two_sum(l, 6), (2, 3))
 
     def test_add_neg(self):
         # test that a single negative number won't break it
@@ -49,9 +49,6 @@ class TestTwoSum(unittest.TestCase):
         self.assertEqual(two_sum(l, -7), (1, 2))
         self.assertEqual(two_sum(l, -13), (1, 3))
         self.assertEqual(two_sum(l, -14), (2, 3))
-
-    def test_errors(self):
-        l = []
 
 
 if __name__ == '__main__':
