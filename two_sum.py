@@ -31,3 +31,16 @@ def two_sum_slow(nums, target):
                 i += 1
                 q = i + 1
     return i, q
+
+# convert the list to a set
+# iterate through the list, subtracting each from target
+# if the answer is in the set find it.
+
+
+def two_sum(nums, target):
+    nums_set = set(nums)
+    for i, num in enumerate(nums):
+        if target - num in nums_set:
+            for q, num2 in enumerate(nums[i+1:], i+1):
+                if target - num == num2:
+                    return i, q
