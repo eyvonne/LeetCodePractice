@@ -15,7 +15,7 @@ use the same element twice
 # one of the tests that I didn't write was for time, and I need to improve
 
 
-def two_sum(nums, target):
+def two_sum_slow(nums, target):
     i, q = 0, 1
     searching = True
     while searching:
