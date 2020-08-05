@@ -59,6 +59,15 @@ class TestPalendomicSubstring(unittest.TestCase):
         word = ''
         self.assertEqual(find_substring(word), '')
 
+    def test_even_odd(self):
+        # test that the solution works on even and odd palendroms
+        word = 'sdalbablakwo'
+        response = 'albabla'
+        self.assertEqual(find_substring(word), response)
+        word = 'sadwecceoin'
+        response = 'ecce'
+        self.assertEqual(find_substring(word), response)
+
 
 if __name__ == '__main__':
     unittest.main()
