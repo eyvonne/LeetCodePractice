@@ -19,7 +19,7 @@ def find_substring(word):
     pal = ''
     max = 0
     for i, letter in enumerate(word):
-        if letter in set(word[i+1:]):
+        if letter.lower() in set(word[i+1:].lower()):
             for q, _ in enumerate(word[i:], i+1):
                 sub = word[i:q].lower()
                 if is_pal(sub):
