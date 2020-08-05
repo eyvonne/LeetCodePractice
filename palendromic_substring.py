@@ -14,6 +14,7 @@ Output: "bb"'''
 # Plan:
 # iterate through the two letter and three letter combos in the string
 # if the two or three is a palendrome check one letter out for also being a palendrome
+# I believe that this code runs in O(n log n) time.
 
 
 def find_substring(word):
@@ -23,30 +24,41 @@ def find_substring(word):
     # helper function to check if a given palendrome is part of a larger palendrome
 
     def extend_pal(word, index, factor):
+        # normalize ref because Aba is a palendrome
         ref = word.lower()
+        # set the start and end of the palendrome check
         a = index-1
         b = index+factor
+        # create the palendrome
         pal = word[index:index+factor]
+        # move out the edges of the palendrome until they don't match
         while ref[a] == ref[b]:
             pal = word[a:b+1]
+            # check that we haven't reached the end of the string
             if a - 1 >= 0 and b + 1 < len(word):
                 a -= 1
                 b += 1
             else:
+                # thats as good as it gets if either end has been reached
                 break
         return pal
     # if the word is a palendrome then it's always the longest palendrome
     if is_pal(word):
         return word
-
-    pal = ''
-    max = 0
+    # otherwise, pal should be the first letter to start
+    pal = word[0] if len(word) > 0 else ''
+    # the length of pal
+    max = 1
     for i in range(len(word)):
+        # check that i isn't too large and is at a two letter palendrome
         if i+2 < len(word) and is_pal(word[i:i+2]):
+            # extend_pal just finds how big the pal is
             extension = extend_pal(word, i, 2)
+            # if its longer than the longest save it
             if len(extension) > max:
                 max = len(extension)
                 pal = extension
+        # essentially the same as other block
         if i+3 < len(word) and is_pal(word[i:i+3]):
             extension = extend_pal(word, i, 3)
             if len(extension) > max:
