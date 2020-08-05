@@ -4,6 +4,7 @@ import unittest
 import timeout_decorator
 from palendromic_substring import find_substring
 
+
 class TestPalendomicSubstring(unittest.TestCase):
     def test_base_case(self):
         word = 'abbaccdda'
@@ -12,7 +13,7 @@ class TestPalendomicSubstring(unittest.TestCase):
 
     def test_no_palindrome(self):
         word = 'abcdefg'
-        response = ['a', 'b', 'c', 'd','e','f','g']
+        response = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
         self.assertIn(find_substring(word), response)
 
     def test_short_pal(self):
@@ -33,10 +34,10 @@ class TestPalendomicSubstring(unittest.TestCase):
 
     def test_capitals(self):
         word = 'Abbacdc'
-        response = 'abba'
+        response = 'Abba'
         self.assertEqual(find_substring(word), response)
         word = 'AABBAAcdfae'
-        response = 'aabbaa'
+        response = 'AABBAA'
         self.assertEqual(find_substring(word), response)
 
     def test_non_alpha(self):
@@ -53,7 +54,7 @@ class TestPalendomicSubstring(unittest.TestCase):
 
     def test_empty_string(self):
         word = ''
-        self.assertEqual(find_substring(word), None)
+        self.assertEqual(find_substring(word), '')
 
 
 if __name__ == '__main__':
