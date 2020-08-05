@@ -13,7 +13,13 @@ class TestPalendomicSubstring(unittest.TestCase):
 
     def test_no_palindrome(self):
         word = 'abcdefg'
-        response = ''
+        response = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+        self.assertIn(find_substring(word), response)
+        word = 'a'
+        response = 'a'
+        self.assertEqual(find_substring(word), response)
+        word = 'ac'
+        response = ['a', 'c']
         self.assertIn(find_substring(word), response)
 
     def test_short_pal(self):

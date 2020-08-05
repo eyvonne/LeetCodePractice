@@ -41,8 +41,8 @@ def find_substring(word):
 
     pal = ''
     max = 0
-    for i in range(len(word)-2):
-        if is_pal(word[i:i+2]):
+    for i in range(len(word)):
+        if i+2 < len(word) and is_pal(word[i:i+2]):
             extension = extend_pal(word, i, 2)
             if len(extension) > max:
                 max = len(extension)
