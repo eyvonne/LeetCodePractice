@@ -13,12 +13,15 @@ class TestPalendomicSubstring(unittest.TestCase):
 
     def test_no_palindrome(self):
         word = 'abcdefg'
-        response = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+        response = ''
         self.assertIn(find_substring(word), response)
 
     def test_short_pal(self):
         word = 'abacddaddc'
         response = 'cddaddc'
+        self.assertEqual(find_substring(word), response)
+        word = 'ababbabacd'
+        response = 'ababbaba'
         self.assertEqual(find_substring(word), response)
 
     def test_pal_in_pal(self):
@@ -49,8 +52,8 @@ class TestPalendomicSubstring(unittest.TestCase):
         self.assertEqual(find_substring(word), response)
 
     def test_short_string(self):
-        word = 'a'
-        self.assertEqual(find_substring(word), word)
+        word = 'aa'
+        self.assertEqual(find_substring(word), 'aa')
 
     def test_empty_string(self):
         word = ''

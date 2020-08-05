@@ -16,17 +16,14 @@ def find_substring(word):
     def is_pal(subWord: str) -> bool:
         return subWord == subWord[::-1]
 
-    pals = {}
-    for i, _ in enumerate(word):
-        for q, _ in enumerate(word[i:], i):
-            sub = word[i:q+1].lower()
-            if len(sub) > 0:
+    pal = ''
+    max = 0
+    for i, letter in enumerate(word):
+        if letter in set(word[i+1:]):
+            for q, _ in enumerate(word[i:], i+1):
+                sub = word[i:q].lower()
                 if is_pal(sub):
-                    if len(sub) in pals:
-                        pals[len(sub)].append(sub)
-                    else:
-                        pals[len(sub)] = [sub]
-    try:
-        return pals[max(pals)][0]
-    except:
-        return None
+                    if len(sub) > max:
+                        pal = word[i:q]
+                        max = len(sub)
+    return pal
