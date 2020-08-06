@@ -36,4 +36,4 @@ def max_profit(prices):
         if day - min > max:
             max = day - min
             max_index = i + 1
-    return max_index
+    return max
