@@ -18,19 +18,18 @@ Output: "bb"'''
 
 
 def find_substring(word):
-    # helper to check that any given string is a palendrome
-    def is_pal(subword: str) -> bool:
-        return subword == subword[::-1]
     # helper function to check if a given palendrome is part of a larger palendrome
-
     def extend_pal(word, index, factor):
         # normalize ref because Aba is a palendrome
         ref = word.lower()
-        # set the start and end of the palendrome check
-        a = index-1
-        b = index+factor
         # create the palendrome
-        pal = word[index:index+factor]
+        pal = word[index:index + factor]
+        # set the start and end of the palendrome check
+        if index - 1 >= 0 and index + factor < len(word):
+            a = index - 1
+            b = index + factor
+        else:
+            return pal
         # move out the edges of the palendrome until they don't match
         while ref[a] == ref[b]:
             pal = word[a:b+1]
@@ -43,27 +42,24 @@ def find_substring(word):
                 break
         return pal
     # if the word is a palendrome then it's always the longest palendrome
-    if is_pal(word):
+    if word == word[::-1]:
         return word
     # otherwise, pal should be the first letter to start
     pal = word[0] if len(word) > 0 else ''
-    # the length of pal
-    max = 1
-    for i in range(len(word)):
+    for i, _ in enumerate(word):
         # check that i isn't too large and is at a two letter palendrome
-        if i+2 < len(word) and is_pal(word[i:i+2]):
+        if i+2 <= len(word) and word[i] == word[i+1]:
             # extend_pal just finds how big the pal is
             extension = extend_pal(word, i, 2)
             # if its longer than the longest save it
-            if len(extension) > max:
-                max = len(extension)
+            if len(extension) > len(pal):
                 pal = extension
         # essentially the same as other block
-        if i+3 < len(word) and is_pal(word[i:i+3]):
+        if i+3 <= len(word) and word[i] == word[i+2]:
             extension = extend_pal(word, i, 3)
-            if len(extension) > max:
-                max = len(extension)
+            if len(extension) > len(pal):
                 pal = extension
+
     return pal
 
 

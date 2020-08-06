@@ -74,9 +74,12 @@ class TestPalendomicSubstring(unittest.TestCase):
         response = 'ecce'
         self.assertEqual(find_substring(word), response)
 
-    def test_abb(self):  # I don't know why this test failed on the submission
+    def test_three_letters(self):  # I don't know why this test failed on the submission
         word = 'abb'
         response = 'bb'
+        self.assertEqual(find_substring(word), response)
+        word = 'ccd'
+        response = 'cc'
         self.assertEqual(find_substring(word), response)
 
 
