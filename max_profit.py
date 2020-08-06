@@ -26,3 +26,14 @@ Explanation: In this case, no transaction is done, i.e. max profit = 0.'''
 # if less than min, set min
 # if current-min > max set max (and index)
 # return index
+def max_profit(prices):
+    min = prices[0] if len(prices) > 0 else 0
+    max = 0
+    max_index = 0
+    for i, day in enumerate(prices):
+        if day < min:
+            min = day
+        if day - min > max:
+            max = day - min
+            max_index = i
+    return max_index
