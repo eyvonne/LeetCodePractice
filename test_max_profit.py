@@ -40,3 +40,13 @@ class TestMaxProfit(unittest.TestCase):
         self.assertEqual(max_profit(stocks), response)
         stocks = [7, 7, 7, 7, 7, 7]
         self.assertEqual(max_profit(stocks), response)
+
+    def test_multiple_answer(self):
+        stocks = [1, 7, 1, 7, 1, 7]
+        response = [1, 3, 5]
+        self.assertIn(max_profit(stocks), response)
+
+    def test_empty_list(self):
+        stocks = []
+        response = 0
+        self.assertEqual(max_profit(stocks), response)
