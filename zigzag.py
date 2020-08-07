@@ -52,15 +52,17 @@ P     I
 # itterate through last row and pull off n-1 and n+1 if not in used
 
 def convert(s, numRows):
+    # if num rows is one we're done:
+    if numRows == 1:
+        return s
     # figure out if we end up or down
     x = 1
-    while x * numRows + (x-2) < len(s):
-        x += 1
-    x -= 1 if x * numRows + (x+2) == len(s) else 0
-    last_bottom = x * numRows + (x-2)
-    print(s[last_bottom])
-    going_down = len(s) < last_bottom + numRows - 2 \
-        or len(s) == last_bottom + 1
+    while x * (numRows-1) < len(s):
+        bottom = x * (numRows-1)
+        print(s[bottom])
+        x += 2
+    going_down = len(s) < bottom + numRows - 2 \
+        or len(s) == bottom + 1
     # start to solve it
     output = ''
     used = set()
@@ -76,10 +78,10 @@ def convert(s, numRows):
             x += 1
     else:
         while x * (2 * numRows - 2) + numRows < len(s):
-            current = x * (2 * numRows - 2) + n
+            current = x * (2 * numRows - 2) + numRows
             output = s[current] + output
             used.add(current)
-            last_row.append(current)
+            last_row = (current)
             x += 1
     # get the other rows, one at a time
     while len(output) < len(s):
@@ -90,6 +92,7 @@ def convert(s, numRows):
                     output += s[x-1]
                 else:
                     output = s[x-1] + output
+                    breakpoint()
                 used.add(x-1)
                 next_row.append(x-1)
             if x+1 < len(s) and x+1 not in used:
@@ -97,6 +100,7 @@ def convert(s, numRows):
                     output += s[x+1]
                 else:
                     output = s[x+1] + output
+                    breakpoint()
                 used.add(x+1)
                 next_row.append(x+1)
         last_row = next_row.copy()
