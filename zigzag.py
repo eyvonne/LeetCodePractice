@@ -52,27 +52,63 @@ P     I
 # itterate through last row and pull off n-1 and n+1 if not in used
 
 def convert(s, numRows):
+    # figure out if we end up or down
+    x = 1
+    while x * numRows + (x-2) < len(s):
+        x += 1
+    x -= 1 if x * numRows + (x+2) == len(s) else 0
+    last_bottom = x * numRows + (x-2)
+    print(s[last_bottom])
+    going_down = len(s) < last_bottom + numRows - 2 \
+        or len(s) == last_bottom + 1
+    # start to solve it
     output = ''
     used = set()
     last_row = []
     x = 0
     # establish first row
-    while x * (2 * numRows - 2) < len(s) and x*(2*numRows-2) not in used:
-        output += s[x*(2*numRows-2)]
-        used.add(x*(numRows*2-2))
-        last_row.append(x*(2*numRows-2))
-        x += 1
+    print(going_down)
+    if going_down:
+        while x * (2 * numRows - 2) < len(s) and x*(2*numRows-2) not in used:
+            output += s[x*(2*numRows-2)]
+            used.add(x*(numRows*2-2))
+            last_row.append(x*(2*numRows-2))
+            x += 1
+    else:
+        while x * (2 * numRows - 2) + numRows < len(s):
+            current = x * (2 * numRows - 2) + n
+            output = s[current] + output
+            used.add(current)
+            last_row.append(current)
+            x += 1
     # get the other rows, one at a time
-    while len(used) < len(s):
+    while len(output) < len(s):
         next_row = []
         for x in last_row:
             if x-1 > 0 and x-1 not in used:
-                output += s[x-1]
+                if going_down:
+                    output += s[x-1]
+                else:
+                    output = s[x-1] + output
                 used.add(x-1)
                 next_row.append(x-1)
             if x+1 < len(s) and x+1 not in used:
-                output += s[x+1]
+                if going_down:
+                    output += s[x+1]
+                else:
+                    output = s[x+1] + output
                 used.add(x+1)
                 next_row.append(x+1)
         last_row = next_row.copy()
     return output
+
+
+'''
+the problem is that this pattern only works if the zigzag ends going down
+If the zigzag ends going up this pattern breaks because its reliant on the row
+above to get a reference to the next number, but if there is no number above it
+can't reference it.
+I can follow essentially the same pattern backwards to resolve this issue, but
+it requires writing essentially a second function and throwing an if on the top
+to figure out if it ends up or down
+'''
