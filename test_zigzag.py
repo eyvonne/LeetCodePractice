@@ -2,7 +2,7 @@ import unittest
 from zigzag import convert
 
 
-class TestZigZag(unittest.Basecase):
+class TestZigZag(unittest.TestCase):
     def test_example1(self):
         input = "PAYPALISHIRING"
         output = 'PAHNAPLSIIGYIR'
