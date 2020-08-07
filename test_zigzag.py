@@ -35,6 +35,9 @@ class TestZigZag(unittest.TestCase):
         output = 'acebdf'
         self.assertEqual(convert(input, 2), output)
         self.assertEqual(convert(input, 1), input)
+        input = 'abcd'
+        output = 'abdc'
+        self.assertEqual(convert(input, 3), output)
 
 
 if __name__ == '__main__':
